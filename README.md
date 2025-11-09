@@ -8,7 +8,7 @@
 
 2 - instalar o github no computador, caso ja não tenha: https://git-scm.com/install/windows
 
-3 - abrir o CMD e clonar o projeto: git clone 
+3 - abrir o CMD e clonar o projeto: git clone https://github.com/eduardoztt/Ferramenta-para-testes-de-Acessibilidade.git
 
 4 - se solicitado para logar com a conta do git, realizar o login para terminar de clonar
 
