@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferramenta de Análise de Acessibilidade</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Ferramenta de Análise de Acessibilidade</h1>
+            <p>
+                Valide a acessibilidade de suas aplicações web com base nas diretrizes WCAG.
+            </p>
+            <p>     
+                Insira seu código-fonte para receber uma análise detalhada e sugestões de melhoria.
+            </p>
+        </header>
+
+        <div class="main-grid">
+            <section class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="16,18 22,12 16,6"></polyline>
+                            <polyline points="8,6 2,12 8,18"></polyline>
+                        </svg>
+                        Código-fonte para Análise
+                    </div>
+                    <div class="card-description">Insira o código-fonte da tela que deseja analisar</div>
+                </div>
+                <div class="card-content">
+                    <div class="form-group">
+                        <label class="form-label" for="sourceCode">Código-fonte *</label>
+                        <textarea 
+                            id="sourceCode" 
+                            class="textarea" 
+                            placeholder="Cole aqui o código-fonte, relacionado ao Front-End da sua aplicação WEB"
+                            rows="5"
+                            maxlength="50000"
+                        ></textarea>
+                        <div id="charCounter" class="char-counter">0 / 0000 caracteres</div>
+                    </div>
+
+
+
+                    <button id="analyzeBtn" class="btn">
+                        Analisar Acessibilidade
+                    </button>
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="20" x2="18" y2="10"></line>
+                            <line x1="12" y1="20" x2="12" y2="4"></line>
+                            <line x1="6" y1="20" x2="6" y2="14"></line>
+                        </svg>
+                        Níveis de Conformidade WCAG
+                    </div>
+                    <div class="card-description">Medidores de conformidade em tempo real</div>
+                </div>
+                <div class="card-content">
+                    <div id="loadingGauges" class="loading hidden">
+                        <div class="spinner"></div>
+                        <p>Estamos calculando a conformidade de sua Tela...</p>
+                        <p>Aguarde! Este processo pode demorar um pouco!</p>
+                    </div>
+                    <div id="errorAlert" class="alert hidden">
+                        Por favor, insira o código-fonte para análise.
+                    </div>
+
+                    <div id="placeholderGauges" class="placeholder">
+                        <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="20" x2="18" y2="10"></line>
+                            <line x1="12" y1="20" x2="12" y2="4"></line>
+                            <line x1="6" y1="20" x2="6" y2="14"></line>
+                        </svg>
+                        <p>Os medidores serão informados após a análise</p>
+                    </div>
+
+                    <div id="gaugesContainer" class="gauges-container hidden">
+                    </div>
+
+                    <div id="summaryBox" class="summary-box hidden">
+                        <div class="summary-title">Resumo Geral</div>
+                        <div class="summary-stats">
+                            <div class="stat-passed">✅ <span id="totalPassed">0</span> critérios atendidos</div>
+                            <div class="stat-failed">❌ <span id="totalFailed">0</span> critérios não atendidos</div>
+                            <div class="stat-score">📊 <span id="totalScore">0</span>% conformidade geral</div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                
+            </section>
+        </div>
+
+
+        <section id="resultsSection" class="card results-section hidden">
+            <div class="card-header">
+                <div class="card-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 12l2 2 4-4"></path>
+                        <circle cx="12" cy="12" r="9"></circle>
+                    </svg>
+                    Resultados da Análise WCAG
+                </div>
+                <div class="card-description">Análise completa de conformidade com todas as diretrizes WCAG 2.2</div>
+            </div>
+            <div class="card-content">
+                <div id="resultsContent">
+                </div>
+            </div>
+        </section>
+
+
+        <section id="suggestionsSection" class="suggestions-section hidden">
+            <div class="suggestions-header">
+                <div class="suggestions-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="12" x2="12" y2="8"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                    Sugestões de Melhoria
+                </div>
+                <div class="suggestions-subtitle">
+                    Recomendações específicas para melhorar a conformidade WCAG baseadas na análise do seu código-fonte
+                </div>
+            </div>
+            <div class="card-content">
+                <div id="suggestionsGrid" class="suggestions-grid">
+                </div>
+            </div>
+        </section>
+
+ 
+        <section class="card info-section">
+            <div class="card-header">
+                <div class="card-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    Sobre a Ferramenta
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h4>🔍 Para QAs e Analistas</h4>
+                        <p>
+                            Valide rapidamente a conformidade WCAG de interfaces e identifique problemas 
+                            de acessibilidade antes do deploy em produção.
+                        </p>
+                    </div>
+                    <div class="info-item">
+                        <h4>👨‍💻 Para Desenvolvedores</h4>
+                        <p>
+                            Receba sugestões práticas e específicas para melhorar a acessibilidade 
+                            do seu código-fonte seguindo as melhores práticas.
+                        </p>
+                    </div>
+                    <div class="info-item">
+                        <h4>📋 Baseado no WCAG 2.2</h4>
+                        <p>
+                             Análise baseada nas 
+                            <a href="https://www.w3c.br/traducoes/wcag/wcag22-pt-BR/" target="_blank" rel="noopener noreferrer"style="text-decoration: none;">diretrizes oficiais do WCAG 2.2</a>, garantindo conformidade 
+                             com padrões internacionais de acessibilidade web.
+                         </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>
+                Ferramenta de Análise WCAG - Dados analisados por Inteligência Artifical.
+            </p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
